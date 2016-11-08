@@ -56,8 +56,12 @@ Functions provided:
    #Use std::move to emplace or emplace_back t into v.
    #SFINAE is used to determine emplace vs emplace_back.
    void emplace_object_move[CONTAINER,TYPE](CONTAINER & v, TYPE & t)
+   #c.push_back(std::move(t))
+   void push_back_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
+   #c.push_front(std::move(t))
+   void push_front_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
 
-For examples, see the unit test container_unit_tests.pyx.  This function is *generic*, and works for any STL container type supporting emplacement.
+For examples, see the unit test container_unit_tests.pyx.  These function are *generic*, and work for any container supporting these operations.
 
 The back-end of emplace_object_move uses variadic templates.  You may expose these variadics to Cython in order to use "emplacement" as intended, which is with constructor arguments as parameters.  The relevant functions are:
 

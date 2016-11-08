@@ -35,6 +35,13 @@ namespace mcpp
     {
         return c.push_back(std::move(t));
     }
+
+    template <typename container, typename type>
+    inline auto
+    push_front_move(container &c, type &t) -> decltype(c.push_front(std::move(t)))
+    {
+        return c.push_front(std::move(t));
+    }
 }
 
 #endif

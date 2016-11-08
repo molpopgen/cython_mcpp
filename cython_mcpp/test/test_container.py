@@ -34,3 +34,16 @@ class PushBackTest(unittest.TestCase):
         self.assertEqual(x['first'],2)
         self.assertEqual(x['second'],4)
 
+class PushFrontTest(unittest.TestCase):
+    def test_push_front_move_list(self):
+        x=container_unit_tests.run_push_front_move_list()
+        self.assertEqual(x['size'],1)
+        self.assertEqual(x['first'],2)
+        self.assertEqual(x['second'],4)
+    def test_push_front_move_deque(self):
+        x=container_unit_tests.run_push_front_move_deque()
+        self.assertEqual(x['size'],1)
+        self.assertEqual(x['first'],2)
+        self.assertEqual(x['second'],4)
+
+
