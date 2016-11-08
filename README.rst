@@ -17,36 +17,39 @@ Containers
 +++++++++++++++++++++++++++++
 
 .. code-block:: cython
-    from cython_mcpp.container cimport *
+   
+   from cython_mcpp.container cimport *
 
  Functions provided:
 
 .. code-block:: cython
-    #Use std::move to emplace or emplace_back t into v.
-    #SFINAE is used to determine emplace vs emplace_back.
-    void emplace_object_move[CONTAINER,TYPE](CONTAINER & v, TYPE & t)
+   
+   #Use std::move to emplace or emplace_back t into v.
+   #SFINAE is used to determine emplace vs emplace_back.
+   void emplace_object_move[CONTAINER,TYPE](CONTAINER & v, TYPE & t)
 
 For examples, see the unit test container_unit_tests.pyx.  This function is *generic*, and works for any STL container type supporting emplacement.
 
 The back-end of emplace_object_move uses variadic templates.  You may expose these variadics to Cython in order to use "emplacement" as intended, which is with constructor arguments as parameters.  The relevant functions are:
 
 .. code-block:: cpp
-    template <typename container, typename... args>
-    inline auto
-    emplace(container &c, args &&... Args)
-        -> decltype(detail::emplace_dispatch(c, std::forward<args>(Args)...))
-    {
-        return detail::emplace_dispatch(c, std::forward<args>(Args)...);
-    }
+    
+   template <typename container, typename... args>
+   inline auto
+   emplace(container &c, args &&... Args)
+       -> decltype(detail::emplace_dispatch(c, std::forward<args>(Args)...))
+   {
+       return detail::emplace_dispatch(c, std::forward<args>(Args)...);
+   }
 
-    template <typename container, typename... args>
-    inline auto
-    emplace_move(container &c, args &&... Args)
+   template <typename container, typename... args>
+   inline auto
+   emplace_move(container &c, args &&... Args)
         -> decltype(emplace(c, std::move(Args)...))
-    {
-        return emplace(c, std::move(Args)...);
-    }
-
+   {
+       return emplace(c, std::move(Args)...);
+   }
 
 See the unit test container_unit_tests.pyx for examples of using these functions for specific tasks.
+
 .. _Cython: http://www.cython.org/
