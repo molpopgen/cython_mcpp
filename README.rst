@@ -3,6 +3,13 @@
 
 This package provides support for move-only C++ objects in Cython_.  For example, vectors of unique_ptr are currently difficult to work with in Cython_, due to the lack of support for move semantics.
 
+License
+================================
+
+setup.py and setup_tests.py are both GPL >= 2.  They were copied from files of the same name found in the CythonGSL_ project, which is GPL.
+
+The rest of the package, including all code, is under the Apache license, as is Cython_. See COPYING or LICENSE.txt for details.
+
 Installation
 =================================
 
@@ -102,3 +109,4 @@ Likewise, emplacement via move at a position is supported:
 See the unit test container_unit_tests.pyx for examples of using these functions for specific tasks.
 
 .. _Cython: http://www.cython.org/
+.. _CythonGSL: https://github.com/twiecki/CythonGSL
