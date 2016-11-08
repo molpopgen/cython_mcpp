@@ -3,6 +3,15 @@
 
 This package provides support for move-only C++ objects in Cython_.  For example, vectors of unique_ptr are currently difficult to work with in Cython_, due to the lack of support for move semantics.
 
+Build status
+==========================================
+
+Master branch:
+
+.. image:: https://travis-ci.org/molpopgen/cython_mcpp.svg?branch=master
+   :target: https://travis-ci.org/molpopgen/cython_mcpp
+   :alt: Travis CI Build Status (master branch)
+
 License
 ================================
 
