@@ -38,7 +38,7 @@ setup(
                 'Environment :: Console',
                 'Operating System :: OS Independent',
                 'Intended Audience :: Science/Research',
-                'License :: OSI Approved :: GNU General Public License (GPL)',
+                'License :: OSI Approved :: Apache Software License',
                 'Programming Language :: Python',
                 'Topic :: Scientific/Engineering'],
     cmdclass = {'build_ext': build_ext},
