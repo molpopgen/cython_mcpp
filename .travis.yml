@@ -47,5 +47,5 @@ install:
     - conda info -a
     - conda install gcc cython
 script:
-    - CC=gcc CXX=g++ python setup_tests.py build_ext -i --use-cython
+    - CC=gcc CXX=g++ python setup_tests.py build_ext -i
     - python -m unittest discover cython_mcpp/test
