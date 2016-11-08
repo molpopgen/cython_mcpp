@@ -3,17 +3,46 @@
 
 This package provides support for move-only C++ objects in Cython_.  For example, vectors of unique_ptr are currently difficult to work with in Cython_, due to the lack of support for move semantics.
 
+Installation
+=================================
+
+.. code-block:: python
+
+   python setup.py install
+   #or
+   python setup.py install --user
+   #or
+   pip install .
+
 Running the unit tests
 =================================
 
 .. code-block:: python
-    python setup_tests.py build_ext -i
-    python -m unittest discover cython_mcpp/test
+
+   python setup_tests.py build_ext -i
+   python -m unittest discover cython_mcpp/test
+
+Including the header files into your own project:
+==================================
+
+.. note:: This only works (has been tested on...) POSIX systems.
+
+Use the following code in your setup.py:
+
+.. code-block:: python
+
+   import cython_mcpp
+   from Cython.Distutils import Extension
+
+   extensions=["name",
+               language="c++",
+               include_dirs=[cython_mcpp.get_includes()],
+               extra_compile_args=['-std=c++11']]
 
 Modules provided
 -----------------------------
 
-Containers
+container
 +++++++++++++++++++++++++++++
 
 .. code-block:: cython
