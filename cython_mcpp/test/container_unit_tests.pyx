@@ -15,6 +15,18 @@ def run_emplace_object_move_vector():
     emplace_object_move(v,i)
     return {'size':v.size(),'first':deref(v[0]).first,'second':deref(v[0]).second}
 
+def run_emplace_object_pos_move_vector():
+    cdef vector[unique_ptr[pair[int,int]]] v
+    cdef unique_ptr[pair[int,int]] i
+    i.reset(new pair[int,int](6,7))
+    emplace_object_move(v,i)
+    i.reset(new pair[int,int](2,4))
+    #Cython will not allow a simple
+    #assignment to p. We must
+    #name a cdef type
+    cdef vector[unique_ptr[pair[int,int]]].iterator p = emplace_object_pos_move(v,v.begin(),i)
+    return {'size':v.size(),'first':deref(p).get().first,'second':deref(p).get().second}
+
 def run_push_back_move_vector():
     cdef vector[unique_ptr[pair[int,int]]] v
     cdef unique_ptr[pair[int,int]] i
@@ -56,6 +68,7 @@ cdef extern from "container.hpp" namespace "mcpp" nogil:
     #See below for comments
     void emplace[container,T](container &,T)
     void emplace_move[container,T](container &,T&,T&)
+    POS emplace_pos_move[CONTAINER,POS,T](CONTAINER &,POS,T)
 
 def run_emplace_vector():
     cdef vector[pair[int,int]] v
@@ -69,6 +82,16 @@ def run_emplace_vector_unique_ptr():
     #the second template type is correctly deduced.
     emplace(v,<pair[int,int]*>new pair[int,int](2,4))
     return {'size':v.size(),'first':deref(v[0]).first,'second':deref(v[0]).second}
+
+def run_emplace_pos_move_vector_unique_ptr():
+    cdef vector[unique_ptr[pair[int,int]]] v
+    emplace_pos_move(v,v.end(),<pair[int,int]*>new pair[int,int](6,7))
+    #Cython will not allow a simple
+    #assignment to p. We must
+    #name a cdef type
+    cdef vector[unique_ptr[pair[int,int]]].iterator p
+    p = emplace_pos_move(v,v.begin(),<pair[int,int]*>new pair[int,int](2,4))
+    return {'size':v.size(),'first':deref(p).get().first,'second':deref(p).get().second}
 
 def run_emplace_move_vector():
     cdef vector[pair[int,int]] v

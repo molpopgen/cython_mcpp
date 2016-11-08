@@ -60,8 +60,12 @@ Functions provided:
    void push_back_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
    #c.push_front(std::move(t))
    void push_front_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
+   #c.emplace(p,std::move(t))
+   POS emplace_object_pos_move[CONTAINER,POS,TYPE](CONTAINER &c,POS p,TYPE &t)
 
 For examples, see the unit test container_unit_tests.pyx.  These function are *generic*, and work for any container supporting these operations.
+
+The unit tests also illustrate cases where casts are needed in order that either the Cython code in the .pyx file or the generated C++ code compile.
 
 The back-end of emplace_object_move uses variadic templates.  You may expose these variadics to Cython in order to use "emplacement" as intended, which is with constructor arguments as parameters.  The relevant functions are:
 
@@ -81,6 +85,18 @@ The back-end of emplace_object_move uses variadic templates.  You may expose the
         -> decltype(emplace(c, std::move(Args)...))
    {
        return emplace(c, std::move(Args)...);
+   }
+
+Likewise, emplacement via move at a position is supported:
+
+.. code-block:: cpp
+
+   template <typename container, typename pos, typename... args>
+   inline auto
+   emplace_pos_move(container &v, pos p, args &&... Args)
+       -> decltype(v.emplace(p, std::forward<args>(Args)...))
+   {
+       return v.emplace(p, std::forward<args>(Args)...);
    }
 
 See the unit test container_unit_tests.pyx for examples of using these functions for specific tasks.

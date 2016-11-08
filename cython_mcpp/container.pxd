@@ -5,3 +5,6 @@ cdef extern from "container.hpp" namespace "mcpp" nogil:
     void push_back_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
     #c.push_front(std::move(t))
     void push_front_move[CONTAINER,TYPE](CONTAINER &c,TYPE &t)
+    #c.emplace(p,std::move(t))
+    POS emplace_object_pos_move[CONTAINER,POS,TYPE](CONTAINER &c,POS p,TYPE &t)
+
