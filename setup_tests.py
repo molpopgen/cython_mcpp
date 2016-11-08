@@ -15,7 +15,6 @@ GLOBAL_INCLUDES=['.','..','../../include','include','../include']
 STANDARD="-std=c++11"
 for pyxfile in glob(os.path.join('cython_mcpp', 'test', '*.pyx')):
     ext_name = splitext(os.path.split(pyxfile)[-1])[0]
-    print ext_name
     ext = Extension('cython_mcpp.test.'+ext_name,
                     [pyxfile],
                     language="c++",
