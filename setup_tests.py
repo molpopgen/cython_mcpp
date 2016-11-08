@@ -11,7 +11,7 @@ import cython_mcpp
 from os.path import splitext
 
 ext_modules = []
-GLOBAL_INCLUDES=['.','..','../../includes','includes','../incude']
+GLOBAL_INCLUDES=['.','..','../../include','include','../include']
 STANDARD="-std=c++11"
 for pyxfile in glob(os.path.join('cython_mcpp', 'test', '*.pyx')):
     ext_name = splitext(os.path.split(pyxfile)[-1])[0]
