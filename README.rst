@@ -20,7 +20,7 @@ Containers
    
    from cython_mcpp.container cimport *
 
- Functions provided:
+Functions provided:
 
 .. code-block:: cython
    
