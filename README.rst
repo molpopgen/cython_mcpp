@@ -50,10 +50,10 @@ Use the following code in your setup.py:
    import cython_mcpp
    from Cython.Distutils import Extension
 
-   extensions=["name",
+   extensions=[Extension("name",
                language="c++",
                include_dirs=[cython_mcpp.get_includes()],
-               extra_compile_args=['-std=c++11']]
+               extra_compile_args=['-std=c++11'])]
 
 Modules provided
 -----------------------------
