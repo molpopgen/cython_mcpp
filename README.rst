@@ -110,9 +110,9 @@ Likewise, emplacement via move at a position is supported:
    template <typename container, typename pos, typename... args>
    inline auto
    emplace_pos_move(container &v, pos p, args &&... Args)
-       -> decltype(v.emplace(p, std::forward<args>(Args)...))
+       -> decltype(v.emplace(p, std::move(Args)...))
    {
-       return v.emplace(p, std::forward<args>(Args)...);
+       return v.emplace(p, std::move(Args)...);
    }
 
 See the unit test container_unit_tests.pyx for examples of using these functions for specific tasks.

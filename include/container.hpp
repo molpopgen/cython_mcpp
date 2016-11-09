@@ -32,9 +32,9 @@ namespace mcpp
     template <typename container, typename pos, typename... args>
     inline auto
     emplace_pos_move(container &v, pos p, args &&... Args)
-        -> decltype(v.emplace(p, std::forward<args>(Args)...))
+        -> decltype(v.emplace(p, std::move(Args)...))
     {
-        return v.emplace(p, std::forward<args>(Args)...);
+        return v.emplace(p, std::move(Args)...);
     }
 
     template <typename container, typename pos, typename type>
