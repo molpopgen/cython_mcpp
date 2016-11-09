@@ -93,6 +93,21 @@ def run_emplace_pos_move_vector_unique_ptr():
     p = emplace_pos_move(v,v.begin(),<pair[int,int]*>new pair[int,int](2,4))
     return {'size':v.size(),'first':deref(p).get().first,'second':deref(p).get().second}
 
+def run_emplace_pos_move_vector_unique_ptr2():
+    cdef vector[unique_ptr[pair[int,int]]] v
+    cdef unique_ptr[pair[int,int]] i
+    i.reset(new pair[int,int](6,7))
+    #Here, we cast the type to "reference to unique_ptr",
+    #which makes this call compatible w/above def'n
+    emplace_pos_move(v,v.end(),<unique_ptr[pair[int,int]]&>i)
+    #Cython will not allow a simple
+    #assignment to p. We must
+    #name a cdef type
+    i.reset(new pair[int,int](2,4))
+    cdef vector[unique_ptr[pair[int,int]]].iterator p
+    p = emplace_pos_move(v,v.begin(),<unique_ptr[pair[int,int]]&>i)
+    return {'size':v.size(),'first':deref(p).get().first,'second':deref(p).get().second}
+
 def run_emplace_move_vector():
     cdef vector[pair[int,int]] v
     emplace_move(v,2,4)

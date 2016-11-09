@@ -38,6 +38,11 @@ class EmplacePosTest(unittest.TestCase):
         self.assertEqual(x['size'],2)
         self.assertEqual(x['first'],2)
         self.assertEqual(x['second'],4)
+    def test_emplace_pos_move_vector_unique_ptr2(self):
+        x = container_unit_tests.run_emplace_pos_move_vector_unique_ptr2()
+        self.assertEqual(x['size'],2)
+        self.assertEqual(x['first'],2)
+        self.assertEqual(x['second'],4)
 
 class PushBackTest(unittest.TestCase):
     def test_push_back_move_vector(self):
