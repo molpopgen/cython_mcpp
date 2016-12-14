@@ -8,3 +8,11 @@ cdef extern from "container.hpp" namespace "mcpp" nogil:
     #c.emplace(p,std::move(t))
     POS emplace_object_pos_move[CONTAINER,POS,TYPE](CONTAINER &c,POS p,TYPE &t)
 
+    #Create  version of emplace and emplace_move
+    #that take constructor arguments.  We 
+    #declare the functions as variadic (using ...)
+    #The variadic arguments represent constructor
+    #parameters for container::value_type
+    void emplace[container](container &,...)
+    void emplace_move[container](container &,...)
+    POS emplace_pos_move[CONTAINER,POS](CONTAINER &,POS,...)

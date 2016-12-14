@@ -60,16 +60,6 @@ def run_emplace_object_move_map():
             'first':deref(x).second.get().first,
             'second':deref(x).second.get().second}
 
-#Create  version of emplace and emplace_move
-#that take constructor arguments
-cdef extern from "container.hpp" namespace "mcpp" nogil:
-    void emplace[container,T](container &,T,T)
-    #The next one is for adding to a container of unique_ptr.
-    #See below for comments
-    void emplace[container,T](container &,T)
-    void emplace_move[container,T](container &,T&,T&)
-    POS emplace_pos_move[CONTAINER,POS,T](CONTAINER &,POS,T)
-
 def run_emplace_vector():
     cdef vector[pair[int,int]] v
     emplace(v,2,4)
